@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>90s Photobooth</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  body {
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    overflow-x: hidden;
+    position: relative;
+    color: #fff;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+      10vw 10vh white, 20vw 15vh white, 30vw 8vh white, 40vw 12vh white, 50vw 10vh white,
+      60vw 14vh white, 70vw 11vh white, 80vw 9vh white, 90vw 13vh white, 100vw 10vh white,
+      5vw 25vh white, 15vw 28vh white, 25vw 22vh white, 35vw 30vh white, 45vw 27vh white,
+      55vw 24vh white, 65vw 29vh white, 75vw 21vh white, 85vw 26vh white, 95vw 23vh white,
+      10vw 40vh white, 20vw 38vh white, 30vw 42vh white, 40vw 35vh white, 50vw 39vh white,
+      60vw 36vh white, 70vw 41vh white, 80vw 37vh white, 90vw 34vh white, 100vw 40vh white,
+      5vw 55vh white, 15vw 53vh white, 25vw 57vh white, 35vw 50vh white, 45vw 56vh white,
+      55vw 52vh white, 65vw 58vh white, 75vw 54vh white, 85vw 59vh white, 95vw 51vh white,
+      10vw 70vh white, 20vw 68vh white, 30vw 72vh white, 40vw 65vh white, 50vw 69vh white,
+      60vw 66vh white, 70vw 71vh white, 80vw 67vh white, 90vw 74vh white, 100vw 70vh white,
+      5vw 85vh white, 15vw 88vh white, 25vw 82vh white, 35vw 80vh white, 45vw 89vh white,
+      55vw 84vh white, 65vw 87vh white, 75vw 81vh white, 85vw 86vh white, 95vw 83vh white,
+      10vw 95vh white, 20vw 98vh white, 30vw 92vh white, 40vw 90vh white, 50vw 99vh white,
+      60vw 94vh white, 70vw 97vh white, 80vw 91vh white, 90vw 96vh white, 100vw 93vh white;
+    animation: twinkle 3s infinite ease-in-out alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes twinkle {
+    from {
+      opacity: 0.2;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .navbar {
+    background: #c0c0c0;
+    border-bottom: 3px solid #000;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    box-shadow: inset 0 1px #fff, inset 0 -1px #000;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+  }
+
+  .navbar button {
+    background: #f0f0f0;
+    border: 2px solid #000;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 #000;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .navbar button:hover {
+    background-color: #ffd700;
+  }
+
+  .title {
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    padding: 20px 10px;
+    text-shadow: 2px 2px #000;
+  }
+
+  .content {
+    padding: 20px;
+    background-color: rgba(128, 128, 128, 0.3);
+    border: 2px dashed #ccc;
+    margin: 15px;
+    display: none;
+    color: #fff;
+    backdrop-filter: blur(2px);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .content ul {
+    padding-left: 20px;
+  }
+
+  .content li {
+    margin-bottom: 8px;
+  }
+
+  a {
+    word-break: break-word;
+  }
+
+  @media (max-width: 600px) {
+    .title {
+      font-size: 1.5rem;
+    }
+
+    .navbar {
+      flex-wrap: nowrap;
+      padding: 10px 5px;
+    }
+
+    .navbar button {
+      padding: 6px 10px;
+      font-size: 0.9rem;
+    }
+
+    .content {
+      padding: 15px;
+      font-size: 0.95rem;
+    }
+
+    .content h2 {
+      font-size: 1.3rem;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <div class="title">📸 QuickTake – Photobooth</div>
+
+  <div class="navbar">
+    <button onclick="showContent('about')">About Us</button>
+    <button onclick="showContent('terms')">Terms and Conditions</button>
+    <button onclick="showContent('privacy')">Privacy Policy</button>
+    <button onclick="showContent('refund')">Cancellation & Refund Policy</button>
+    <button onclick="showContent('shipping')">Billing & Product Visibility</button>
+    <button onclick="showContent('contact')">Contact Us</button>
+  </div>
+
+  <div id="home" class="content" style="display: block;">
+    <h2>Welcome to Quicktake Photobooth</h2>
+    <p>Experience the charm of the 90s with our fully restored Apple QuickTake 100 (Windows version) digital camera, now reimagined in an interactive kiosk. Choose between a vintage or modern camera, custom templates, and walk away with instant prints and a 5-second throwback video.</p>
+    <ul>
+      <li>✔️ On-spot strip prints</li>
+      <li>✔️ Vintage Apple interface</li>
+      <li>✔️ Free QR softcopy</li>
+      <li>✔️ UPI-based digital payment</li>
+      <li>✔️ Located at Kormangala, Bangalore</li>
+    </ul>
+  </div>
+
+  <div id="about" class="content">
+    <h2>About Us</h2>
+    <p><b>QuickTake Photobooth</b> is a Bangalore-based nostalgic tech experience by a team of vintage tech enthusiasts. Our goal is to preserve photography history by blending it with modern interactions. We use original hardware and custom-developed software to revive the <b>Apple QuickTake 100 (1994)</b> one of the world’s first digital cameras.</p>
+  </div>
+
+  <div id="terms" class="content">
+    <h2>Terms and Conditions</h2>
+    <ul>
+      <li>✔️ Use the photobooth legally and respectfully.</li>
+      <li>✔️ Not misuse or resell the media generated.</li>
+      <li>✔️ All content, logos, and branding belong to QuickTake Photobooth.</li>
+      <li>✔️ Limitation of liability: We are not responsible for delays caused by technical issues or third-party providers.</li>
+    </ul>
+  </div>
+
+  <div id="privacy" class="content">
+    <h2>Privacy Policy</h2>
+    <ul>
+      <li>✔️ Name, email, contact number during payment or inquiry.</li>
+      <li>✔️ Payment details (via UPI gateway) are processed securely and not stored.</li>
+      <li>✔️ Data is never shared or sold to third parties.</li>
+      <li>✔️ You have full rights to access or delete your personal data by request.</li>
+    </ul>
+  </div>
+
+  <div id="refund" class="content">
+    <h2>Cancellation & Refund Policy</h2>
+    <ul>
+      <li>✔️ Cancellations are accepted within 30 minutes of booking.</li>
+      <li>✔️ No refunds after the photo session is completed.</li>
+      <li>✔️ For disputes, contact us within 24 hours.</li>
+    </ul>
+  </div>
+
+  <div id="shipping" class="content">
+    <h2>Billing & Product Visibility</h2>
+    <ul>
+      <li>✔️ Billing Name: <b>QuickTake Photobooth</b></li>
+      <li>✔️ Pricing: <b>2 Strips-₹199, 4 Strips-₹349, 6 Strips-₹499</b> </li>
+      <li>✔️ Prices are displayed before session starts.</li>
+    </ul>
+  </div>
+
+  <div id="contact" class="content">
+    <h2>📞 Contact Us</h2>
+    <p><strong>QuickTake Photobooth</strong> (Owned by Karthik Enterprises)</p>
+    <p>📍 Church Street, Bangalore, Karnataka – 560001</p>
+    <p>📞 <a href="tel:+918971846698" style="color: #fff;">+91 89718 46698</a></p>
+    <p>📧 <a href="mailto:quicktakebooth@gmail.com" style="color: #fff;">quicktakebooth@gmail.com</a></p>
+    <p>🌐 <a href="https://www.photobooths.in" target="_blank" style="color: #fff;">www.photobooths.in</a></p>
+  </div>
+
+  <script>
+    function showContent(id) {
+      const sections = document.querySelectorAll('.content');
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
+</body>
+</html>
