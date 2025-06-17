@@ -2,229 +2,483 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>90s Photobooth</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="QuickTake Photobooth - Experience vintage and modern instant photography in Bangalore. On-spot prints, throwback videos, and more!">
+  <title>QuickTake Photobooth</title>
+  <link rel="icon" href="favicon.ico">
+  <!-- Open Graph tags for social sharing -->
+  <meta property="og:title" content="QuickTake Photobooth">
+  <meta property="og:description" content="Experience the charm of the 90s with our Apple QuickTake 100 digital camera, now an interactive photobooth in Bangalore.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.photobooths.in">
+  <meta property="og:image" content="https://www.photobooths.in/og-image.jpg">
   <style>
-  body {
-    font-family: 'Courier New', monospace;
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    overflow-x: hidden;
-    position: relative;
-    color: #fff;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 2px;
-    height: 2px;
-    background: transparent;
-    box-shadow:
-      10vw 10vh white, 20vw 15vh white, 30vw 8vh white, 40vw 12vh white, 50vw 10vh white,
-      60vw 14vh white, 70vw 11vh white, 80vw 9vh white, 90vw 13vh white, 100vw 10vh white,
-      5vw 25vh white, 15vw 28vh white, 25vw 22vh white, 35vw 30vh white, 45vw 27vh white,
-      55vw 24vh white, 65vw 29vh white, 75vw 21vh white, 85vw 26vh white, 95vw 23vh white,
-      10vw 40vh white, 20vw 38vh white, 30vw 42vh white, 40vw 35vh white, 50vw 39vh white,
-      60vw 36vh white, 70vw 41vh white, 80vw 37vh white, 90vw 34vh white, 100vw 40vh white,
-      5vw 55vh white, 15vw 53vh white, 25vw 57vh white, 35vw 50vh white, 45vw 56vh white,
-      55vw 52vh white, 65vw 58vh white, 75vw 54vh white, 85vw 59vh white, 95vw 51vh white,
-      10vw 70vh white, 20vw 68vh white, 30vw 72vh white, 40vw 65vh white, 50vw 69vh white,
-      60vw 66vh white, 70vw 71vh white, 80vw 67vh white, 90vw 74vh white, 100vw 70vh white,
-      5vw 85vh white, 15vw 88vh white, 25vw 82vh white, 35vw 80vh white, 45vw 89vh white,
-      55vw 84vh white, 65vw 87vh white, 75vw 81vh white, 85vw 86vh white, 95vw 83vh white,
-      10vw 95vh white, 20vw 98vh white, 30vw 92vh white, 40vw 90vh white, 50vw 99vh white,
-      60vw 94vh white, 70vw 97vh white, 80vw 91vh white, 90vw 96vh white, 100vw 93vh white;
-    animation: twinkle 3s infinite ease-in-out alternate;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  @keyframes twinkle {
-    from {
-      opacity: 0.2;
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      position: relative;
+      min-height: 100vh;
     }
-    to {
-      opacity: 1;
+    /* Animated starfield background */
+    #starfield {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
     }
-  }
-
-  .navbar {
-    background: #c0c0c0;
-    border-bottom: 3px solid #000;
-    padding: 10px;
-    display: flex;
-    gap: 10px;
-    box-shadow: inset 0 1px #fff, inset 0 -1px #000;
-    overflow-x: auto;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-  }
-
-  .navbar button {
-    background: #f0f0f0;
-    border: 2px solid #000;
-    padding: 8px 12px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 2px 2px 0 #000;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .navbar button:hover {
-    background-color: #ffd700;
-  }
-
-  .title {
-    color: #fff;
-    font-size: 2rem;
-    text-align: center;
-    padding: 20px 10px;
-    text-shadow: 2px 2px #000;
-  }
-
-  .content {
-    padding: 20px;
-    background-color: rgba(128, 128, 128, 0.3);
-    border: 2px dashed #ccc;
-    margin: 15px;
-    display: none;
-    color: #fff;
-    backdrop-filter: blur(2px);
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .content h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-
-  .content ul {
-    padding-left: 20px;
-  }
-
-  .content li {
-    margin-bottom: 8px;
-  }
-
-  a {
-    word-break: break-word;
-  }
-
-  @media (max-width: 600px) {
-    .title {
-      font-size: 1.5rem;
+    header, nav, main, section, footer {
+      position: relative;
+      z-index: 1;
     }
-
-    .navbar {
-      flex-wrap: nowrap;
-      padding: 10px 5px;
+    header {
+      background: #111;
+      padding: 1em 0 0.5em 0;
+      text-align: center;
     }
-
-    .navbar button {
-      padding: 6px 10px;
-      font-size: 0.9rem;
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      color: #fff;
+      text-shadow: 2px 2px #000;
     }
-
-    .content {
-      padding: 15px;
-      font-size: 0.95rem;
+    nav {
+      background: #222;
+      padding: 0.5em 0;
+      text-align: center;
     }
-
-    .content h2 {
-      font-size: 1.3rem;
+    nav a {
+      color: #fff;
+      margin: 0 1em;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.2s;
     }
-  }
+    nav a:focus, nav a:hover {
+      color: #fff;
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+    main {
+      padding: 2em 1em 4em 1em;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    section {
+      margin-bottom: 2.5em;
+      background: rgba(128,128,128,0.15);
+      border-radius: 8px;
+      padding: 1.5em 1em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    section h2 {
+      color: #fff;
+      margin-top: 0;
+    }
+    .contact-link { color: #fff; }
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 1em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+    }
+    /* Back to Top button */
+    #backToTop {
+      position: fixed;
+      bottom: 2.5em;
+      right: 2em;
+      z-index: 200;
+      display: none;
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 0.7em 1.1em;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px #000;
+      cursor: pointer;
+      font-size: 1.5em;
+    }
+    /* Floating sublink menu styles for all screens */
+    #sublinkMenuBtn {
+      position: fixed;
+      top: 2em;
+      right: 1.2em;
+      z-index: 300;
+      background: #232323;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      font-size: 2em;
+      box-shadow: 0 2px 8px #0006;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    #sublinkMenuBtn:focus, #sublinkMenuBtn:hover {
+      background: #fff;
+      color: #232323;
+    }
+    #sublinkMenu {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 5.5em;
+      right: 1.2em;
+      background: #181818ee;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px #000a;
+      z-index: 301;
+      min-width: 180px;
+      padding: 0.7em 0.5em;
+      gap: 0.3em;
+      animation: fadeIn 0.2s;
+    }
+    #sublinkMenu.show {
+      display: flex;
+    }
+    #sublinkMenu a {
+      color: #fff;
+      background: #232323;
+      border-radius: 8px;
+      padding: 0.7em 1em;
+      text-decoration: none;
+      font-size: 1.08rem;
+      margin: 0.1em 0;
+      transition: background 0.2s, color 0.2s;
+      text-align: left;
+    }
+    #sublinkMenu a:focus, #sublinkMenu a:hover {
+      background: #fff;
+      color: #232323;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.3rem; }
+      main { padding: 1em 0.5em 4em 0.5em; }
+      nav {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        background: #181818;
+        box-shadow: 0 2px 8px #0004;
+        border-radius: 0 0 12px 12px;
+        margin: 0 0.5em;
+        padding: 0.5em 0.5em;
+      }
+      nav a {
+        font-size: 1.1rem;
+        margin: 0.3em 0;
+        padding: 0.9em 1em;
+        background: #232323;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px #0002;
+        transition: background 0.2s, color 0.2s;
+        display: block;
+      }
+      nav a:focus, nav a:hover {
+        background: #fff;
+        color: #181818;
+        outline: none;
+      }
+      section { padding: 1em 0.5em; }
+      /* Example sublink style for mobile */
+      .nav-sublinks {
+        display: flex;
+        flex-direction: column;
+        margin: 0.2em 0 0.7em 1.2em;
+        gap: 0.2em;
+      }
+      .nav-sublinks a {
+        background: #333;
+        color: #fff;
+        font-size: 0.98rem;
+        padding: 0.6em 1em;
+        border-radius: 6px;
+        margin: 0.1em 0;
+        box-shadow: none;
+      }
+      .nav-sublinks a:focus, .nav-sublinks a:hover {
+        background: #fff;
+        color: #181818;
+      }
+    }
+    /* Always allow scrolling on mobile */
+    @media (max-width: 600px) {
+      html, body { overflow: auto !important; }
+    }
   </style>
 </head>
 <body>
-
-  <div class="title">📸 QuickTake – Photobooth</div>
-
-  <div class="navbar">
-    <button onclick="showContent('about')">About Us</button>
-    <button onclick="showContent('terms')">Terms and Conditions</button>
-    <button onclick="showContent('privacy')">Privacy Policy</button>
-    <button onclick="showContent('refund')">Cancellation & Refund Policy</button>
-    <button onclick="showContent('service')">Services</button>
-    <button onclick="showContent('contact')">Contact Us</button>
+  <canvas id="starfield"></canvas>
+  <header>
+    <h1>📸 QuickTake Photobooth</h1>
+  </header>
+  <!-- Remove main nav, keep only floating sublink menu button and menu -->
+  <button id="sublinkMenuBtn" aria-label="Show quick links">☰</button>
+  <div id="sublinkMenu" role="menu" aria-label="Quick Links">
+    <a href="#about" role="menuitem">About Us</a>
+    <a href="#services" role="menuitem">Services</a>
+    <a href="#terms" role="menuitem">Terms</a>
+    <a href="#privacy" role="menuitem">Privacy</a>
+    <a href="#refund" role="menuitem">Refund Policy</a>
+    <a href="#contact" role="menuitem">Contact Us</a>
+    <a href="#press" role="menuitem">In the News</a>
   </div>
-
-  <div id="home" class="content" style="display: block;">
-    <h2>Welcome to Quicktake Photobooth</h2>
-    <p>Experience the charm of the 90s with our fully restored Apple QuickTake 100 (Windows version) digital camera, now reimagined in an interactive kiosk. Choose between a vintage or modern camera, custom templates, and walk away with instant prints and a 5-second throwback video.</p>
-    <ul>
-      <li>✔️ On-spot strip prints</li>
-      <li>✔️ Vintage Apple interface</li>
-      <li>✔️ Free QR softcopy</li>
-      <li>✔️ UPI-based digital payment</li>
-      <li>✔️ Located at Koramangala, Bangalore</li>
-    </ul>
-  </div>
-
-  <div id="about" class="content">
-    <h2>About Us</h2>
-    <p><b>QuickTake Photobooth</b> is a Bangalore-based nostalgic tech experience by a team of vintage tech enthusiasts. Our goal is to preserve photography history by blending it with modern interactions. We use original hardware and custom-developed software to revive the <b>Apple QuickTake 100 (1994)</b> one of the world’s first digital cameras.</p>
-  </div>
-
-  <div id="terms" class="content">
-    <h2>Terms and Conditions</h2>
-    <ul>
-      <li>✔️ Use the photobooth legally and respectfully.</li>
-      <li>✔️ Not misuse or resell the media generated.</li>
-      <li>✔️ All content, logos, and branding belong to QuickTake Photobooth.</li>
-      <li>✔️ Limitation of liability: We are not responsible for delays caused by technical issues or third-party providers.</li>
-    </ul>
-  </div>
-
-  <div id="privacy" class="content">
-    <h2>Privacy Policy</h2>
-    <ul>
-      <li>✔️ Name, email, contact number during payment or inquiry.</li>
-      <li>✔️ Payment details (via UPI gateway) are processed securely and not stored.</li>
-      <li>✔️ Data is never shared or sold to third parties.</li>
-      <li>✔️ You have full rights to access or delete your personal data by request.</li>
-    </ul>
-  </div>
-
-  <div id="refund" class="content">
-    <h2>Cancellation & Refund Policy</h2>
-    <ul>
-      <li>✔️ Cancellations are accepted before photo prints.</li>
-      <li>✔️ No refunds after the photo session is completed.</li>
-      <li>✔️ For disputes, contact us within 24 hours.</li>
-    </ul>
-  </div>
-
-  <div id="service" class="content">
-    <h2>Product / Services</h2>
-    <ul>
-      <li>✔️ Billing Name: <b>QuickTake Photobooth</b></li>
-      <li>✔️ Pricing: <b>2 Strips-₹199, 4 Strips-₹349, 6 Strips-₹499</b> </li>
-      <li>✔️ Prices are displayed before session starts.</li>
-    </ul>
-  </div>
-
-  <div id="contact" class="content">
-    <h2>📞 Contact Us</h2>
-    <p><strong>QuickTake Photobooth</strong></p>
-    <p>📍 Church Street, Bangalore, Karnataka – 560001</p>
-    <p>📞 <a href="tel:+918971846698" style="color: #fff;">+91 89718 46698</a></p>
-    <p>📧 <a href="mailto:enquiry@photobooths.in" style="color: #fff;">enquiry@photobooths.in</a></p>
-    <p>🌐 <a href="https://www.photobooths.in" target="_blank" style="color: #fff;">www.photobooths.in</a></p>
-  </div>
-
+  <main>
+    <section id="home">
+      <h2>Welcome to Quicktake Photobooth</h2>
+      <p>Experience the charm of the 90s with our fully restored Apple QuickTake 100 (Windows version) digital camera, now reimagined in an interactive kiosk. Choose between a vintage or modern camera, custom templates, and walk away with instant prints and a 5-second throwback video.</p>
+      <ul>
+        <li>✔️ On-spot strip prints</li>
+        <li>✔️ Vintage Apple interface</li>
+        <li>✔️ Free QR softcopy</li>
+        <li>✔️ UPI-based digital payment</li>
+        <li>✔️ Located at Koramangala, Bangalore</li>
+      </ul>
+    </section>
+    <section id="about">
+      <h2>About Us</h2>
+      <p><b>QuickTake Photobooth</b> is a Bangalore-based nostalgic tech experience by a team of vintage tech enthusiasts. Our goal is to preserve photography history by blending it with modern interactions. We use original hardware and custom-developed software to revive the <b>Apple QuickTake 100 (1994)</b>, one of the world’s first digital cameras.</p>
+    </section>
+    <section id="services">
+      <h2>Services</h2>
+      <ul>
+        <li>✔️ Billing Name: <b>QuickTake Photobooth</b></li>
+        <li>✔️ Pricing: <b>2 Strips-₹199, 4 Strips-₹349, 6 Strips-₹499</b></li>
+        <li>✔️ Prices are displayed before session starts.</li>
+      </ul>
+    </section>
+    <section id="terms">
+      <h2>Terms and Conditions</h2>
+      <ul>
+        <li>✔️ Use the photobooth legally and respectfully.</li>
+        <li>✔️ Not misuse or resell the media generated.</li>
+        <li>✔️ All content, logos, and branding belong to QuickTake Photobooth.</li>
+        <li>✔️ Limitation of liability: We are not responsible for delays caused by technical issues or third-party providers.</li>
+      </ul>
+    </section>
+    <section id="privacy">
+      <h2>Privacy Policy</h2>
+      <ul>
+        <li>✔️ Name, email, contact number during payment or inquiry.</li>
+        <li>✔️ Payment details (via UPI gateway) are processed securely and not stored.</li>
+        <li>✔️ Data is never shared or sold to third parties.</li>
+        <li>✔️ You have full rights to access or delete your personal data by request.</li>
+      </ul>
+    </section>
+    <section id="refund">
+      <h2>Cancellation & Refund Policy</h2>
+      <ul>
+        <li>✔️ Cancellations are accepted before photo prints.</li>
+        <li>✔️ No refunds after the photo session is completed.</li>
+        <li>✔️ For disputes, contact us within 24 hours.</li>
+      </ul>
+    </section>
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p><strong>QuickTake Photobooth</strong></p>
+      <p>📍 Church Street, Bangalore, Karnataka – 560001</p>
+      <p>📞 <a href="tel:+918971846698" class="contact-link">+91 89718 46698</a></p>
+      <p>📧 <a href="mailto:enquiry@photobooths.in" class="contact-link">enquiry@photobooths.in</a></p>
+      <p>🌐 <a href="https://www.photobooths.in" target="_blank" class="contact-link">www.photobooths.in</a></p>
+    </section>
+    <section id="press" style="margin-bottom:2.5em;background:rgba(255,255,255,0.07);border-radius:8px;padding:1.5em 1em;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+      <h2 style="color:#fff;">In the News</h2>
+      <p style="font-size:1.1em;line-height:1.7;">
+        <strong>Featured in The Indian Express:</strong> <br>
+        Our QuickTake Photobooth was recently covered in a detailed article by The Indian Express, highlighting the revival of vintage photo booths in Bengaluru using the rare Apple QuickTake 100 camera. The article explores the inspiration behind the project, the challenges of sourcing and restoring vintage technology, and how our booth blends nostalgia with modern convenience. It also shares the story of how the booth was designed to recreate the authentic experience of classic photo booths, right down to the look and feel of the 1970s and 80s, and the technical journey of making the Apple QuickTake 100 work in a modern setting.<br><br>
+        <em>“In an era dominated by smartphone cameras and Instagram filters, a 23-year-old Bengaluru native is bringing photo booths back.”</em>
+      </p>
+      <a href="https://indianexpress.com/article/technology/tech-news-technology/photo-booth-rebirth-bengaluru-apple-quicktake-100-camera-10013312/" target="_blank" style="display:inline-block;margin-top:1em;padding:0.7em 1.2em;background:#fff;color:#111;font-weight:bold;border-radius:6px;text-decoration:none;box-shadow:0 2px 8px #0002;">Read the full article</a>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 QuickTake Photobooth. All rights reserved.
+  </footer>
+  <button id="backToTop" aria-label="Back to top" style="position:fixed;bottom:2.5em;right:2em;z-index:200;display:none;background:#111;color:#fff;border:none;padding:0.7em 1.1em;border-radius:50%;box-shadow:0 2px 8px #000;cursor:pointer;font-size:1.5em;">↑</button>
   <script>
-    function showContent(id) {
-      const sections = document.querySelectorAll('.content');
-      sections.forEach(sec => sec.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
+    // Shooting stars animation
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let shootingStars = [];
+    const STAR_COUNT = 100;
+    const SHOOTING_STAR_FREQ = 0.012; // chance per frame
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: 0.7 + Math.random() * 1.2,
+          o: 0.3 + Math.random() * 0.7
+        });
+      }
+    }
+    function drawStars() {
+      for (let s of stars) {
+        ctx.globalAlpha = s.o;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, 2 * Math.PI);
+        ctx.fillStyle = '#fff';
+        ctx.shadowColor = '#fff';
+        ctx.shadowBlur = 6;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      ctx.globalAlpha = 1;
+    }
+    function spawnShootingStar() {
+      // Random edge (top or left)
+      let fromTop = Math.random() < 0.5;
+      let x = fromTop ? Math.random() * canvas.width : 0;
+      let y = fromTop ? 0 : Math.random() * canvas.height;
+      // Random angle (down-right)
+      let angle = Math.PI / 4 + (Math.random() - 0.5) * Math.PI / 8;
+      let speed = 8 + Math.random() * 6;
+      shootingStars.push({
+        x, y, angle, speed, len: 0, maxLen: 80 + Math.random() * 60, alpha: 1
+      });
+    }
+    function drawShootingStars() {
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        let s = shootingStars[i];
+        let dx = Math.cos(s.angle) * s.speed;
+        let dy = Math.sin(s.angle) * s.speed;
+        ctx.save();
+        ctx.globalAlpha = s.alpha;
+        ctx.strokeStyle = '#fff';
+        ctx.shadowColor = '#fff';
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x - dx * s.len / s.speed, s.y - dy * s.len / s.speed);
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+        s.x += dx;
+        s.y += dy;
+        if (s.len < s.maxLen) s.len += s.speed * 1.5;
+        else s.alpha -= 0.04;
+        if (s.x > canvas.width || s.y > canvas.height || s.alpha <= 0) {
+          shootingStars.splice(i, 1);
+        }
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawStars();
+      if (Math.random() < SHOOTING_STAR_FREQ) spawnShootingStar();
+      drawShootingStars();
+      requestAnimationFrame(animate);
+    }
+    window.addEventListener('resize', () => {
+      resize();
+      createStars();
+    });
+    resize();
+    createStars();
+    animate();
+
+    // Back to Top button logic
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 200 ? 'block' : 'none';
+    });
+    backToTop.onclick = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Floating sublink menu logic (all screens)
+    const sublinkMenuBtn = document.getElementById('sublinkMenuBtn');
+    const sublinkMenu = document.getElementById('sublinkMenu');
+    sublinkMenuBtn.style.display = 'flex';
+    sublinkMenuBtn.addEventListener('click', () => {
+      sublinkMenu.classList.toggle('show');
+    });
+    // Hide menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!sublinkMenu.contains(e.target) && !sublinkMenuBtn.contains(e.target)) {
+        sublinkMenu.classList.remove('show');
+      }
+    });
+
+    // Drag and drop for floating button
+    let isDragging = false;
+    let offsetX = 0, offsetY = 0;
+    sublinkMenuBtn.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      offsetX = e.clientX - sublinkMenuBtn.getBoundingClientRect().left;
+      offsetY = e.clientY - sublinkMenuBtn.getBoundingClientRect().top;
+      document.body.style.userSelect = 'none';
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      let x = e.clientX - offsetX;
+      let y = e.clientY - offsetY;
+      // Keep button within viewport
+      x = Math.max(0, Math.min(window.innerWidth - sublinkMenuBtn.offsetWidth, x));
+      y = Math.max(0, Math.min(window.innerHeight - sublinkMenuBtn.offsetHeight, y));
+      sublinkMenuBtn.style.top = y + 'px';
+      sublinkMenuBtn.style.left = x + 'px';
+      sublinkMenuBtn.style.right = 'auto';
+      sublinkMenuBtn.style.bottom = 'auto';
+      // Move menu with button
+      sublinkMenu.style.top = (y + sublinkMenuBtn.offsetHeight + 10) + 'px';
+      sublinkMenu.style.left = x + 'px';
+      sublinkMenu.style.right = 'auto';
+    });
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+      document.body.style.userSelect = '';
+    });
+    // Touch support
+    sublinkMenuBtn.addEventListener('touchstart', function(e) {
+      isDragging = true;
+      const touch = e.touches[0];
+      offsetX = touch.clientX - sublinkMenuBtn.getBoundingClientRect().left;
+      offsetY = touch.clientY - sublinkMenuBtn.getBoundingClientRect().top;
+      document.body.style.userSelect = 'none';
+    });
+    document.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      const touch = e.touches[0];
+      let x = touch.clientX - offsetX;
+      let y = touch.clientY - offsetY;
+      x = Math.max(0, Math.min(window.innerWidth - sublinkMenuBtn.offsetWidth, x));
+      y = Math.max(0, Math.min(window.innerHeight - sublinkMenuBtn.offsetHeight, y));
+      sublinkMenuBtn.style.top = y + 'px';
+      sublinkMenuBtn.style.left = x + 'px';
+      sublinkMenuBtn.style.right = 'auto';
+      sublinkMenuBtn.style.bottom = 'auto';
+      sublinkMenu.style.top = (y + sublinkMenuBtn.offsetHeight + 10) + 'px';
+      sublinkMenu.style.left = x + 'px';
+      sublinkMenu.style.right = 'auto';
+    }, { passive: false });
+    document.addEventListener('touchend', function() {
+      isDragging = false;
+      document.body.style.userSelect = '';
+    });
   </script>
 </body>
 </html>
