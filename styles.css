@@ -1,0 +1,209 @@
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  position: relative;
+  min-height: 100vh;
+}
+/* Animated starfield background */
+#starfield {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+header, nav, main, section, footer {
+  position: relative;
+  z-index: 1;
+}
+header {
+  background: #111;
+  padding: 1em 0 0.5em 0;
+  text-align: center;
+}
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: #fff;
+  text-shadow: 2px 2px #000;
+}
+nav {
+  background: #222;
+  padding: 0.5em 0;
+  text-align: center;
+}
+nav a {
+  color: #fff;
+  margin: 0 1em;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+nav a:focus, nav a:hover {
+  color: #fff;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+main {
+  padding: 2em 1em 4em 1em;
+  max-width: 900px;
+  margin: 0 auto;
+}
+section {
+  margin-bottom: 2.5em;
+  background: rgba(128,128,128,0.15);
+  border-radius: 8px;
+  padding: 1.5em 1em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+section h2 {
+  color: #fff;
+  margin-top: 0;
+}
+.contact-link { color: #fff; }
+footer {
+  background: #111;
+  color: #aaa;
+  text-align: center;
+  padding: 1em 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+/* Back to Top button */
+#backToTop {
+  position: fixed;
+  bottom: 2.5em;
+  right: 2em;
+  z-index: 200;
+  display: none;
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 0.7em 1.1em;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px #000;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+/* Floating sublink menu styles for all screens */
+#sublinkMenuBtn {
+  position: fixed;
+  top: 2em;
+  right: 1.2em;
+  z-index: 300;
+  background: #232323;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  font-size: 2em;
+  box-shadow: 0 2px 8px #0006;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+#sublinkMenuBtn:focus, #sublinkMenuBtn:hover {
+  background: #fff;
+  color: #232323;
+}
+#sublinkMenu {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 5.5em;
+  right: 1.2em;
+  background: #181818ee;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px #000a;
+  z-index: 301;
+  min-width: 180px;
+  padding: 0.7em 0.5em;
+  gap: 0.3em;
+  animation: fadeIn 0.2s;
+}
+#sublinkMenu.show {
+  display: flex;
+}
+#sublinkMenu a {
+  color: #fff;
+  background: #232323;
+  border-radius: 8px;
+  padding: 0.7em 1em;
+  text-decoration: none;
+  font-size: 1.08rem;
+  margin: 0.1em 0;
+  transition: background 0.2s, color 0.2s;
+  text-align: left;
+}
+#sublinkMenu a:focus, #sublinkMenu a:hover {
+  background: #fff;
+  color: #232323;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 600px) {
+  header h1 { font-size: 1.3rem; }
+  main { padding: 1em 0.5em 4em 0.5em; }
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: #181818;
+    box-shadow: 0 2px 8px #0004;
+    border-radius: 0 0 12px 12px;
+    margin: 0 0.5em;
+    padding: 0.5em 0.5em;
+  }
+  nav a {
+    font-size: 1.1rem;
+    margin: 0.3em 0;
+    padding: 0.9em 1em;
+    background: #232323;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px #0002;
+    transition: background 0.2s, color 0.2s;
+    display: block;
+  }
+  nav a:focus, nav a:hover {
+    background: #fff;
+    color: #181818;
+    outline: none;
+  }
+  section { padding: 1em 0.5em; }
+  /* Example sublink style for mobile */
+  .nav-sublinks {
+    display: flex;
+    flex-direction: column;
+    margin: 0.2em 0 0.7em 1.2em;
+    gap: 0.2em;
+  }
+  .nav-sublinks a {
+    background: #333;
+    color: #fff;
+    font-size: 0.98rem;
+    padding: 0.6em 1em;
+    border-radius: 6px;
+    margin: 0.1em 0;
+    box-shadow: none;
+  }
+  .nav-sublinks a:focus, .nav-sublinks a:hover {
+    background: #fff;
+    color: #181818;
+  }
+}
+/* Always allow scrolling on mobile */
+@media (max-width: 600px) {
+  html, body { overflow: auto !important; }
+}
