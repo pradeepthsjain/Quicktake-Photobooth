@@ -179,3 +179,150 @@ document.addEventListener('touchend', function() {
   isDragging = false;
   document.body.style.userSelect = '';
 });
+
+// EmailJS configuration
+(function() {
+    emailjs.init("NcUsKR8HmSBV0TN22"); // Your EmailJS public key
+})();
+
+let userAcceptedCookies = false;
+let pendingDownload = null;
+
+// Check if cookies were already accepted
+window.onload = function() {
+    if (localStorage.getItem('cookiesAccepted') === 'true') {
+        document.getElementById('cookieBanner').style.display = 'none';
+        userAcceptedCookies = true;
+    }
+};
+
+function acceptCookies() {
+    localStorage.setItem('cookiesAccepted', 'true');
+    document.getElementById('cookieBanner').style.display = 'none';
+    userAcceptedCookies = true;
+}
+
+function declineCookies() {
+    document.getElementById('cookieBanner').style.display = 'none';
+}
+
+function trackQuotationClick(productName, pdfPath = null, fileName = null) {
+    if (!userAcceptedCookies) {
+        alert('Please accept cookies first to download quotations.');
+        return;
+    }
+    
+    // Store download info for later
+    pendingDownload = { pdfPath, fileName, productName };
+    
+    // Show quick phone modal
+    document.getElementById('quickEmailModal').style.display = 'flex';
+    setTimeout(() => {
+        const phoneInput = document.getElementById('quickEmail');
+        phoneInput.focus();
+        // Set cursor position after +91 
+        phoneInput.setSelectionRange(4, 4);
+    }, 100);
+}
+
+function submitQuickEmail() {
+    const phoneNumber = document.getElementById('quickEmail').value;
+    
+    if (!phoneNumber) {
+        skipEmail();
+        return;
+    }
+    
+    // Basic phone number validation
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,15}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+        alert('Please enter a valid phone number');
+        return;
+    }
+    
+    // Send notification to you using your service ID
+    emailjs.send("service_lmwi6zb", "template_aw2ibpe", {
+        to_email: "enquiry@photobooths.in",
+        customer_phone: phoneNumber,
+        product_name: pendingDownload.productName,
+        timestamp: new Date().toLocaleString(),
+        message: `Phone: ${phoneNumber} requested quotation for ${pendingDownload.productName}`
+    })
+    .then(function() {
+        alert('Thank you! We have your phone number and will contact you personally soon.');
+        document.getElementById('quickEmailModal').style.display = 'none';
+        document.getElementById('quickEmail').value = '';
+        downloadPendingPDF();
+    })
+    .catch(function(error) {
+        console.error('Email error:', error);
+        alert('Contact details sent! Downloading your quotation...');
+        document.getElementById('quickEmailModal').style.display = 'none';
+        document.getElementById('quickEmail').value = '';
+        downloadPendingPDF();
+    });
+}
+
+function skipEmail() {
+    document.getElementById('quickEmailModal').style.display = 'none';
+    document.getElementById('quickEmail').value = '';
+    downloadPendingPDF();
+}
+
+function downloadPendingPDF() {
+    if (pendingDownload && pendingDownload.pdfPath) {
+        const link = document.createElement('a');
+        link.href = pendingDownload.pdfPath;
+        link.download = pendingDownload.fileName;
+        link.click();
+    }
+    pendingDownload = null;
+}
+
+// Close email modal when clicking outside
+document.getElementById('quickEmailModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        skipEmail();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('quickEmailModal');
+        if (modal.style.display === 'flex') {
+            skipEmail();
+        }
+    }
+});
+
+// Maintain +91 prefix in phone input
+document.addEventListener('DOMContentLoaded', function() {
+    const phoneInput = document.getElementById('quickEmail');
+    
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value;
+        
+        // Always ensure it starts with +91 
+        if (!value.startsWith('+91 ')) {
+            e.target.value = '+91 ';
+            e.target.setSelectionRange(4, 4);
+        }
+    });
+    
+    phoneInput.addEventListener('keydown', function(e) {
+        const cursorPos = e.target.selectionStart;
+        
+        // Prevent deletion of +91 prefix
+        if ((e.key === 'Backspace' || e.key === 'Delete') && cursorPos <= 4) {
+            e.preventDefault();
+        }
+    });
+    
+    phoneInput.addEventListener('focus', function(e) {
+        // Ensure cursor is after +91 when focused
+        if (e.target.selectionStart < 4) {
+            e.target.setSelectionRange(4, 4);
+        }
+    });
+});

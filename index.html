@@ -13,8 +13,30 @@
   <meta property="og:url" content="https://www.photobooths.in">
   <meta property="og:image" content="https://www.photobooths.in/og-image.jpg">
   <link rel="stylesheet" href="styles.css">
+  <!-- Add EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
+  <!-- Cookie Consent Banner -->
+  <div id="cookieBanner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #333; color: white; padding: 1rem; z-index: 1000; text-align: center;">
+    <p>We use cookies to improve your experience and to send you relevant offers. By continuing to browse, you accept our use of cookies. 
+    <button onclick="acceptCookies()" style="background: #007bff; color: white; border: none; padding: 0.5rem 1rem; margin-left: 1rem; border-radius: 4px; cursor: pointer;">Accept & Continue</button>
+    <button onclick="declineCookies()" style="background: #6c757d; color: white; border: none; padding: 0.5rem 1rem; margin-left: 0.5rem; border-radius: 4px; cursor: pointer;">Decline</button>
+    </p>
+  </div>
+
+  <!-- Quick Phone Modal -->
+  <div id="quickEmailModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1001; align-items: center; justify-content: center;">
+    <div style="background: white; padding: 2rem; border-radius: 10px; max-width: 300px; width: 90%; color: #333; text-align: center;">
+      <h3>Quick Contact</h3>
+      <p style="margin-bottom: 1rem; font-size: 14px;">Your phone number for quotation updates:</p>
+      <input type="tel" id="quickEmail" value="+91 " placeholder="+91 98765 43210" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 1rem;">
+      <div style="display: flex; gap: 0.5rem;">
+        <button onclick="submitQuickEmail()" style="flex: 1; padding: 0.5rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Send</button>
+        <button onclick="skipEmail()" style="flex: 1; padding: 0.5rem; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">Skip</button>
+      </div>
+    </div>
+  </div>
   <canvas id="starfield"></canvas>
   <header>
     <h1>📸 QuickTake Photobooth</h1>
@@ -22,7 +44,8 @@
   <!-- Remove main nav, keep only floating sublink menu button and menu -->
   <button id="sublinkMenuBtn" aria-label="Show quick links">☰</button>
   <div id="sublinkMenu" role="menu" aria-label="Quick Links">
-    <a href="#about" role="menuitem">About Us</a>
+    <a href="#products" role="menuitem">Our Products</a>
+    <a href="#portfolio" role="menuitem">Recent Projects</a>
     <a href="#services" role="menuitem">Services</a>
     <a href="#terms" role="menuitem">Terms</a>
     <a href="#privacy" role="menuitem">Privacy</a>
@@ -32,20 +55,76 @@
   </div>
   <main>
     <section id="home">
-      <h2>Welcome to Quicktake Photobooth</h2>
-      <p>Experience the charm of the 90s with our fully restored Apple QuickTake 100 (Windows version) digital camera, now reimagined in an interactive kiosk. Choose between a vintage or modern camera, custom templates, and walk away with instant prints and a 5-second throwback video.</p>
+      <h2>About Quicktake Photobooth</h2>
+      <p>Experience the charm of the 90s with our fully restored Apple QuickTake 100 (Windows version) digital camera, now reimagined in an interactive kiosk. Choose between custom templates, and walk away with instant prints and a 5-second throwback video.</p>
       <ul>
         <li>✔️ On-spot strip prints</li>
-        <li>✔️ Vintage Apple interface</li>
+        <li>✔️ Vintage Apple camera</li>
         <li>✔️ Free QR softcopy</li>
         <li>✔️ UPI-based digital payment</li>
-        <li>✔️ Located at Koramangala, Bangalore</li>
+        <li>✔️ Located at BOHO Koramangala, Bangalore</li>
       </ul>
     </section>
-    <section id="about">
-      <h2>About Us</h2>
-      <p><b>QuickTake Photobooth</b> is a Bangalore-based nostalgic tech experience by a team of vintage tech enthusiasts. Our goal is to preserve photography history by blending it with modern interactions. We use original hardware and custom-developed software to revive the <b>Apple QuickTake 100 (1994)</b>, one of the world’s first digital cameras.</p>
+    
+    <section id="products">
+      <h2>🎭 Our Products & Solutions</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <h3>🎪 Retro Photobooth</h3>
+          <p>Experience authentic vintage photography with our classic retro photobooths. Features old-school curtains, vintage lighting, and classic black & white strip prints that capture the timeless charm of the 1950s-70s era.</p>
+          <ul class="product-features">
+            <li>✨ Classic 1990 Kiosk design</li>
+            <li>📸 Vintage filter options</li>
+            <li>🖼️ Traditional strip prints</li>
+            <li>💡 Warm vintage lighting</li>
+          </ul>
+          <button class="quotation-btn" onclick="trackQuotationClick('Retro Photobooth', 'Quotation/photobooth cabin.pdf', 'Photobooth_Quotation.pdf')">📄 Get Quotation</button>
+        </div>
+        
+        <div class="product-card">
+          <h3>📰 Newspaper Photobooth</h3>
+          <p>Make headlines with your photos! Our newspaper-themed photobooth creates personalized newspaper front pages with your photos as the main story. Perfect for events, parties, and corporate functions.</p>
+          <ul class="product-features">
+            <li>📰 Custom newspaper layouts</li>
+            <li>🏆 Personalized headlines and contents.</li>
+            <li>📅 Tempalate customization</li>
+            <li>🖨️ High-quality newsprint style</li>
+          </ul>
+          <button class="quotation-btn" onclick="trackQuotationClick('Newspaper Photobooth', 'Quotation/newspaper .pdf', 'Newspaper_Photobooth_Quotation.pdf')">📄 Get Quotation</button>
+        </div>
+        
+        <div class="product-card featured">
+          <h3>🔄 Integrated Solution</h3>
+          <p><strong>Best of Both Worlds!</strong> Our flagship integrated photobooth combines retro charm with newspaper creativity. Switch between vintage and modern modes, choose your preferred template, and get both classic strips and newspaper prints or both.</p>
+          <ul class="product-features">
+            <li>🎛️ Dual-mode operation</li>
+            <li>🎨 Multiple template options</li>
+            <li>📱 Digital & physical copies</li>
+            <li>⚡ Quick mode switching</li>
+            <li>🎁 Integrated payment gateway</li>
+          </ul>
+          <div class="featured-badge">Latest Project</div>
+          <!--<button class="quotation-btn" onclick="trackQuotationClick('Integrated Solution')">📄 Get Quotation</button>-->
+        </div>
+      </div>
     </section>
+    
+    <section id="portfolio">
+      <h2>🎉 Events</h2>
+      <div class="cta-section">
+        <h3>Ready to create memories for your event?</h3>
+        <p>We provide photobooths for all types of events - weddings, corporate functions, parties, and celebrations. We're open to flexible arrangements including:</p>
+        <ul style="text-align: left; max-width: 400px; margin: 0 auto 1rem auto;">
+          <li>✨ <strong>Collaboration</strong> - Partner with us for mutual benefits</li>
+          <li>💰 <strong>Profit Sharing</strong> - Share revenue from bookings</li>
+          <li>🏠 <strong>Rental Basis</strong> - Fixed rental for your event</li>
+          <li>🎯 <strong>Custom Packages</strong> - Tailored to your needs</li>
+        </ul>
+        <p>Contact us on WhatsApp to discuss the best arrangement for your event!</p>
+        <a href="https://wa.me/918971846698?text=Hi! I'm interested in QuickTake Photobooth for my event. Can we discuss collaboration/rental options?" class="cta-button" target="_blank">💬 Chat on WhatsApp</a>
+      </div>
+    </section>
+    
     <section id="services">
       <h2>Services</h2>
       <ul>
